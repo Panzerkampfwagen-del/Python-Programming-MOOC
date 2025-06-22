@@ -1,2 +1,2 @@
 # Python-Programming-MOOC
-This is my solution to the exercises given in this course,all thanks to my partner ChatGPT (shoutout to ChatGPT). The learning curve was quite steep so it was a fun journey for me!
+This is my solution to the exercises given in this course. The learning curve was quite steep so it was a fun journey for me!
