@@ -60,7 +60,6 @@ class Room:
         return None
 
 #item_suitcase_hold
-# Write your solution here:
 class Item:
     def __init__(self,name, weight:int):
         self.__name=name
