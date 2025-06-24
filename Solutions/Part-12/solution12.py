@@ -164,4 +164,81 @@ def all_vowels(my_string: str):
 def time_of_day(my_string: str):
     return bool(re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d",my_string))
 
-#
+#hockey_statistics
+import json
+
+class HockeyApplication:
+    def __init__(self)->None:
+        pass
+
+    def print_player(self, p):
+        points = p['goals'] + p['assists']
+        return f"{p['name']:20} {p['team']}  {p['goals']:2} + {p['assists']:2} = {points:3}"
+
+    def execute(self):
+        file=input("file name: ")
+        with open(file) as f:
+            contents=f.read()
+        content=json.loads(contents)
+        print(f"read the data of {len(content)} players")
+        print("""
+              commands:
+                0 quit
+                1 search for player
+                2 teams
+                3 countries
+                4 players in team
+                5 players from country
+                6 most points
+                7 most goals
+              """) 
+        while True:
+            command=input("command: ")
+            if command=="1":
+                name=input("name: ")
+                for player in content:
+                    if player["name"]==name:
+                        print(self.print_player(player))
+                        break
+            elif command=="2":
+                teams = sorted(set(player["team"] for player in content))
+                for team in teams:
+                    print(team)
+            elif command=="3":
+                countries = sorted(set(player["nationality"] for player in content))
+                for country in countries:
+                    print(country)
+            elif command=="4":
+                team=input("team: ")
+                players = [p for p in content if p["team"] == team]
+                players.sort(key=lambda x: x["goals"] + x["assists"], reverse=True)
+                for player in players:
+                    print(self.print_player(player))
+            elif command=="5":
+                country=input("country: ")
+                players = [p for p in content if p["nationality"] == country]
+                players.sort(key=lambda x: x["goals"] + x["assists"], reverse=True)
+                for player in players:
+                    print(self.print_player(player))
+            elif command=="6":
+                count = int(input("how many: "))
+                players = sorted(
+                    content,
+                    key=lambda x: (x["goals"] + x["assists"], x["goals"]),
+                    reverse=True
+                )
+                for player in players[:count]:
+                    print(self.print_player(player))
+            elif command=="7":
+                count = int(input("how many: "))
+                players = sorted(
+                    content,
+                    key=lambda x: (-x["goals"], x["games"])
+                )
+                for player in players[:count]:
+                    print(self.print_player(player))
+            elif command=="0":
+                break
+
+hockey=HockeyApplication()
+hockey.execute()
