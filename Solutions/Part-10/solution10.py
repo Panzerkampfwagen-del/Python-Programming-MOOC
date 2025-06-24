@@ -338,7 +338,6 @@ class PhoneBook:
 
     def add_number(self, name: str, number: str):
         if not name in self.__persons:
-            # add a new dictionary entry with an empty list for the numbers
             self.__persons[name] = []
 
         self.__persons[name].append(number)
@@ -381,7 +380,6 @@ class PhoneBookApplication:
         self.__phonebook = PhoneBook()
         self.__filehandler = FileHandler("phonebook.txt")
 
-        # add the names and numbers from the file to the phone book
         for name, numbers in self.__filehandler.load_file().items():
             for number in numbers:
                 self.__phonebook.add_number(name, number)
@@ -435,8 +433,6 @@ class PhoneBookApplication:
             else:
                 self.help()
 
-# when you run the tests, nothing apart from these two lines should be placed in the 
-# main function, outside any class definitions 
 application = PhoneBookApplication()
 application.execute()
 
